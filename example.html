@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>React Responsive Audio Player</title>
+    <link rel="stylesheet" href="dist/audioplayer.css">
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: gold;
+      }
+      .demo {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+      .header {
+        margin: 2rem;
+        color: #222;
+        font-size: 42px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="demo">
+      <div id="audio_player_container"></div>
+    </main>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/prop-types/prop-types.js"></script>
+
+    <script src="dist/audioplayer.js"></script>
+    <script>
+      var playlist = [
+        {
+          url: 'https://r6---sn-p5qs7ned.googlevideo.com/videoplayback?lmt=1531644803236937&ipbits=0&itag=251&fvip=2&key=yt6&mime=audio%2Fwebm&expire=1533662666&mn=sn-p5qs7ned%2Csn-p5qlsndd&mm=31%2C29&c=WEB&ms=au%2Crdu&mv=m&mt=1533640905&ip=18.216.37.148&ei=aoFpW6KaD47HwQGx2q3wBQ&sparams=clen%2Cdur%2Cei%2Cgir%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpcm2%2Cpl%2Crequiressl%2Csource%2Cexpire&keepalive=yes&id=o-AHNsQdJ5qpvxuuWe48Tmkle394__SZvUnQQe0sv1BNXl&clen=3123626&pcm2=yes&requiressl=yes&gir=yes&pl=14&beids=%5B9466591%5D&initcwndbps=920000&dur=189.581&source=youtube&signature=187D3B4E31641302498EF0C478BE8A15068C0A97.6ECF6D1650FA8486735410628359B43ED2531D81&ratebypass=yes',
+          title: 'Dollor msldbfkjbskjg osihgiohf oghoish goihgo i',
+          album: 'React Responsive Audio Player sfdyugfu hiusfg giuho ',
+          artwork: 'https://pixel.nymag.com/imgs/daily/vulture/2018/02/05/05-justin-timberlake-superbowl-2.w710.h473.jpg'
+        },
+        {
+          url: 'https://r6---sn-p5qs7ned.googlevideo.com/videoplayback?lmt=1531644803236937&ipbits=0&itag=251&fvip=2&key=yt6&mime=audio%2Fwebm&expire=1533662666&mn=sn-p5qs7ned%2Csn-p5qlsndd&mm=31%2C29&c=WEB&ms=au%2Crdu&mv=m&mt=1533640905&ip=18.216.37.148&ei=aoFpW6KaD47HwQGx2q3wBQ&sparams=clen%2Cdur%2Cei%2Cgir%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Ckeepalive%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpcm2%2Cpl%2Crequiressl%2Csource%2Cexpire&keepalive=yes&id=o-AHNsQdJ5qpvxuuWe48Tmkle394__SZvUnQQe0sv1BNXl&clen=3123626&pcm2=yes&requiressl=yes&gir=yes&pl=14&beids=%5B9466591%5D&initcwndbps=920000&dur=189.581&source=youtube&signature=187D3B4E31641302498EF0C478BE8A15068C0A97.6ECF6D1650FA8486735410628359B43ED2531D81&ratebypass=yes',
+          title: 'Dollor',
+          album: 'React  ',
+          artwork: 'https://pixel.nymag.com/imgs/daily/vulture/2018/02/05/05-justin-timberlake-superbowl-2.w710.h473.jpg'
+        }
+      ];
+      var audioElement = {};
+      ReactDOM.render(
+        React.createElement(AudioPlayer, {
+          playlist: playlist,
+          autoplay: true,
+          audioElementRef: function (elem) {
+            audioElement = elem;
+          },
+          onMediaEvent: {
+            'playing': function (e) {
+              console.log('Playback has started', audioElement.src);
+            },
+            'pause': function (e) {
+              console.log('Playback was paused', audioElement.src);
+            }
+          }
+        }),
+        document.getElementById('audio_player_container')
+      );
+    </script>
+  </body>
+</html>
