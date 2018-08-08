@@ -167,7 +167,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var deprecated = _step.value;
 
 	      if (loggedDeprecations.indexOf(deprecated.name) === -1) {
-	        logWarning('\n        The `' + deprecated.name + '` prop is deprecated. It will be removed\n        in react-responsive-audio-player v2.0.0.\n        ' + deprecated.alternativeMessage);
+	        logWarning('\n        The `' + deprecated.name + '` prop is deprecated. It will be removed\n        in meuzic-player v2.0.0.\n        ' + deprecated.alternativeMessage);
 	        loggedDeprecations.push(deprecated.name);
 	      }
 	    }
@@ -222,7 +222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'skip_button_inner' },
-	      _react2.default.createElement('img', { src: _skip2.default, alt: 'Skip Next', width: '25', height: '25' })
+	      _react2.default.createElement('img', { src: _skip2.default, alt: 'Skip Next', width: '20', height: '20' })
 	    )
 	  );
 	};
@@ -261,7 +261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'play_pause_inner' },
-	      !audioPlayer.state.paused ? _react2.default.createElement('img', { src: _pause2.default, alt: 'Play', width: '30' }) : _react2.default.createElement('img', { src: _playButton2.default, alt: 'Play', width: '30' })
+	      !audioPlayer.state.paused ? _react2.default.createElement('img', { src: _pause2.default, alt: 'Play', width: '25' }) : _react2.default.createElement('img', { src: _playButton2.default, alt: 'Play', width: '25' })
 	    )
 	  );
 	};
@@ -353,7 +353,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	       * the new time is visually previewed before the
 	       * audio seeks.
 	       */
-	      displayedTime: 0
+	      displayedTime: 0,
+	      palyer: true // ON
 	    };
 
 	    _this.state = _this.defaultState;
@@ -400,6 +401,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    };
 	    _this.expend = _this.expend.bind(_this);
+	    _this.closePlayer = _this.closePlayer.bind(_this);
 	    return _this;
 	  }
 
@@ -742,6 +744,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({ expend: true });
 	    }
 	  }, {
+	    key: 'closePlayer',
+	    value: function closePlayer() {
+	      this.setState({ palyer: false });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var activeIndex = this.state.activeTrackIndex;
@@ -755,6 +762,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var timeRatio = elapsedTime + ' / ' + fullTime;
 	      var progressBarWidth = displayedTime / duration * 100 + '%';
 	      var commonProps = { displayText: displayText, timeRatio: timeRatio, elapsedTime: elapsedTime, fullTime: fullTime, progressBarWidth: progressBarWidth, audioPlayer: this };
+
+	      if (!this.state.palyer) {
+	        return false;
+	      }
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -768,7 +780,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'audio_player_close' },
-	            _react2.default.createElement('img', { src: _close2.default, alt: 'Close', width: '15', height: '15' })
+	            _react2.default.createElement('img', { onClick: this.closePlayer, src: _close2.default, alt: 'Close', width: '15', height: '15' })
 	          ),
 	          _react2.default.createElement(
 	            'div',

@@ -72,7 +72,7 @@ function logDeprecationWarnings (props) {
     if (loggedDeprecations.indexOf(deprecated.name) === -1) {
       logWarning(`
         The \`${deprecated.name}\` prop is deprecated. It will be removed
-        in react-responsive-audio-player v2.0.0.
+        in meuzic-player v2.0.0.
         ${deprecated.alternativeMessage}`);
       loggedDeprecations.push(deprecated.name);
     }
@@ -112,7 +112,7 @@ const SkipButton = ({ hidden, back, onClick }) => (
     onClick={onClick}
   >
     <div className="skip_button_inner">
-      <img src={SkipNextImg} alt="Skip Next" width="25" height="25"/>
+      <img src={SkipNextImg} alt="Skip Next" width="20" height="20"/>
     </div>
   </div>
 );
@@ -144,7 +144,7 @@ const PlayPauseButton = ({ audioPlayer }) => (
     onClick={audioPlayer.togglePause}
   >
     <div className="play_pause_inner">
-      {!audioPlayer.state.paused ? <img src={PauseButtonImg} alt="Play" width="30"/> : <img src={PlayButtonImg} alt="Play" width="30"/>}
+      {!audioPlayer.state.paused ? <img src={PauseButtonImg} alt="Play" width="25"/> : <img src={PlayButtonImg} alt="Play" width="25"/>}
     </div>
   </div>
 );
@@ -220,7 +220,8 @@ class AudioPlayer extends React.Component {
        * the new time is visually previewed before the
        * audio seeks.
        */
-      displayedTime: 0
+      displayedTime: 0,
+      palyer : true // ON
     };
 
     this.state = this.defaultState;
@@ -255,6 +256,7 @@ class AudioPlayer extends React.Component {
       activeTrackIndex: this.currentTrackIndex
     });
     this.expend = this.expend.bind(this);
+    this.closePlayer = this.closePlayer.bind(this);
   }
 
   componentDidMount () {
@@ -569,6 +571,10 @@ class AudioPlayer extends React.Component {
     this.setState({expend : true})
   }
 
+  closePlayer(){
+    this.setState({palyer : false})
+  }
+
   render () {
     let activeIndex = this.state.activeTrackIndex;
     let displayText = this.props.getDisplayText(this.props.playlist[activeIndex]);
@@ -581,6 +587,11 @@ class AudioPlayer extends React.Component {
     let timeRatio = `${ elapsedTime } / ${ fullTime }`;
     let progressBarWidth = `${ (displayedTime / duration) * 100 }%`;
     let commonProps = { displayText, timeRatio,elapsedTime, fullTime ,progressBarWidth, audioPlayer: this };
+
+    if(!this.state.palyer) {
+      return false
+    }
+
     return (
       <div>
         <div
@@ -588,7 +599,9 @@ class AudioPlayer extends React.Component {
           className={'audio_player'}
           title={displayText}
         >
-          <div className="audio_player_close"><img src={Close} alt="Close" width="15" height="15"/></div>
+          <div className="audio_player_close">
+            <img onClick={this.closePlayer} src={Close} alt="Close" width="15" height="15"/>
+          </div>
           <div className="track_details">
             <audio ref={this.setAudioElementRef} />
             <div className="track_info">

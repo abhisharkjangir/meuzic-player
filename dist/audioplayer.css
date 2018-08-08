@@ -112,21 +112,30 @@
 
 .audio_player_close {
   position: absolute;
-  top: -17px;
+  top: -18px;
   right: 10px;
   background-color: #fff;
-  padding: 9px 9px 8px 10px;
-  /* width: 20px; */
+  padding: 5px;
+  width: 25px;
   border-radius: 50%;
   display: inline-block;
-  /* height: 20px; */
-  cursor: pointer; }
+  height: 25px;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.31); }
+  .audio_player_close img {
+    margin: auto;
+    display: block;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    margin-top: 5px; }
 
 .audio_player {
   position: fixed;
   bottom: 0;
   background-color: #fff;
   width: 100%;
+  height: auto;
   /* http://codepen.io/aralon/pen/NqGWXZ */ }
   .audio_player .spacer {
     width: 10px; }
@@ -151,18 +160,26 @@
             flex-direction: row;
     padding: 10px; }
     .audio_player .track_info .track_artwork {
-      width: 100px; }
+      width: 100px;
+      height: 60px; }
+      .audio_player .track_info .track_artwork img {
+        -o-object-fit: cover;
+           object-fit: cover;
+        -o-object-position: center;
+           object-position: center;
+        width: 100%;
+        height: 60px; }
     .audio_player .track_info .track_name {
-      padding: 0 0 0 10px;
-      width: calc(100% - 120px); }
+      padding: 5px 0 0 10px;
+      width: calc(100% - 120px);
+      height: 55px; }
     .audio_player .track_info .track_title {
-      font-size: 24px;
+      font-size: 18px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis; }
     .audio_player .track_info .track_album {
-      font-size: 18px;
-      margin: auto;
+      font-size: 14px;
       margin-top: 5px;
       white-space: nowrap;
       overflow: hidden;
@@ -223,7 +240,7 @@
             justify-content: center;
     -webkit-box-align: center;
             align-items: center;
-    padding: 10px 10px 15px 10px; }
+    padding: 0px 10px 15px 10px; }
   .audio_player .audio_expender {
     border-radius: 15px; }
     .audio_player .audio_expender img {
